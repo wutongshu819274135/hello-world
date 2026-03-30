@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>考勤系统前端</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>企业考勤系统</h1>
+      <p>支持签到、签退、迟到统计与记录查询</p>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <h2>快速操作</h2>
+        <form id="attendance-form" class="form-grid">
+          <label>
+            员工姓名
+            <select id="employee" required></select>
+          </label>
+
+          <label>
+            操作类型
+            <select id="action" required>
+              <option value="checkin">签到</option>
+              <option value="checkout">签退</option>
+            </select>
+          </label>
+
+          <label>
+            备注
+            <input id="note" type="text" maxlength="40" placeholder="可选" />
+          </label>
+
+          <button type="submit">提交考勤</button>
+        </form>
+      </section>
+
+      <section class="panel stats" aria-live="polite">
+        <h2>今日统计</h2>
+        <div class="stat-list">
+          <article>
+            <p class="stat-number" id="total-checkins">0</p>
+            <p>签到人数</p>
+          </article>
+          <article>
+            <p class="stat-number" id="late-count">0</p>
+            <p>迟到人数</p>
+          </article>
+          <article>
+            <p class="stat-number" id="total-checkouts">0</p>
+            <p>签退人数</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel full-width">
+        <div class="table-head">
+          <h2>考勤记录</h2>
+          <button id="clear-records" class="danger">清空记录</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>员工</th>
+              <th>操作</th>
+              <th>状态</th>
+              <th>备注</th>
+            </tr>
+          </thead>
+          <tbody id="records-body"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <template id="empty-row-template">
+      <tr>
+        <td colspan="5" class="empty">暂无记录，请先提交签到或签退。</td>
+      </tr>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
